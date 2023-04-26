@@ -1,0 +1,54 @@
+version: "3"
+services:
+    php81:
+        container_name: php81
+        build:
+            context: ./
+            dockerfile: ./php81/Dockerfile
+        restart: always
+        ports:
+            - "8081:80"
+        volumes:
+            - ./apache/:/etc/apache2/sites-enabled/:z
+            - ./htdocs/:/var/www/html/:z
+            - ./php81/php.ini:/usr/local/etc/php/php.ini:z
+        depends_on:
+            - mariadb
+    php72:
+        container_name: php72
+        build:
+            context: ./
+            dockerfile: ./php72/Dockerfile
+        restart: always
+        ports:
+            - "8072:80"
+        volumes:
+            - ./apache/:/etc/apache2/sites-enabled/:z
+            - ./htdocs/:/var/www/html/:z
+            - ./php72/php.ini:/usr/local/etc/php/php.ini:z
+        depends_on:
+            - mariadb
+    php56:
+        container_name: php56
+        build:
+            context: ./
+            dockerfile: ./php56/Dockerfile
+        restart: always
+        ports:
+            - "8056:80"
+        volumes:
+            - ./apache/:/etc/apache2/sites-enabled/:z
+            - ./htdocs/:/var/www/html/:z
+            - ./php56/php.ini:/usr/local/etc/php/php.ini:z
+        depends_on:
+            - mariadb
+    mariadb:
+        container_name: db
+        image: mariadb:latest
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+        volumes:
+            - ./mysql/data/:/var/lib/mysql:z
