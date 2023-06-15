@@ -21,8 +21,3 @@ Docker Compose setup to run multiple PHP version with Apache and MySQL
 - http://localhost:8056/info.php - php5.6
 - http://localhost:8072/info.php - php7.2
 - http://localhost:8081/info.php - php8.1
-### Support Me
-#### Saweria
-- https://saweria.co/rivaiskowo
-
-![Saweria](https://user-images.githubusercontent.com/6821901/234471532-d14177c1-a2f5-411d-9510-e7bdf1d36d7c.png)
