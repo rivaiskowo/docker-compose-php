@@ -1,5 +1,19 @@
 version: "3"
 services:
+    php82:
+        container_name: php82
+        build:
+            context: ./
+            dockerfile: ./php82/Dockerfile
+        restart: always
+        ports:
+            - "82:80"
+        volumes:
+            - ${CONFIG_APACHE}
+            - ${PUBLIC_HTML}
+            - ./php82/php.ini:/usr/local/etc/php/php.ini:z
+        depends_on:
+            - mariadb
     php81:
         container_name: php81
         build:
@@ -7,11 +21,25 @@ services:
             dockerfile: ./php81/Dockerfile
         restart: always
         ports:
-            - "8081:80"
+            - "81:80"
         volumes:
-            - ./apache/:/etc/apache2/sites-enabled/:z
-            - ./htdocs/:/var/www/html/:z
+            - ${CONFIG_APACHE}
+            - ${PUBLIC_HTML}
             - ./php81/php.ini:/usr/local/etc/php/php.ini:z
+        depends_on:
+            - mariadb
+    php73:
+        container_name: php73
+        build:
+            context: ./
+            dockerfile: ./php73/Dockerfile
+        restart: always
+        ports:
+            - "73:80"
+        volumes:
+            - ${CONFIG_APACHE}
+            - ${PUBLIC_HTML}
+            - ./php73/php.ini:/usr/local/etc/php/php.ini:z
         depends_on:
             - mariadb
     php72:
@@ -21,10 +49,10 @@ services:
             dockerfile: ./php72/Dockerfile
         restart: always
         ports:
-            - "8072:80"
+            - "72:80"
         volumes:
-            - ./apache/:/etc/apache2/sites-enabled/:z
-            - ./htdocs/:/var/www/html/:z
+            - ${CONFIG_APACHE}
+            - ${PUBLIC_HTML}
             - ./php72/php.ini:/usr/local/etc/php/php.ini:z
         depends_on:
             - mariadb
@@ -35,10 +63,10 @@ services:
             dockerfile: ./php56/Dockerfile
         restart: always
         ports:
-            - "8056:80"
+            - "56:80"
         volumes:
-            - ./apache/:/etc/apache2/sites-enabled/:z
-            - ./htdocs/:/var/www/html/:z
+            - ${CONFIG_APACHE}
+            - ${PUBLIC_HTML}
             - ./php56/php.ini:/usr/local/etc/php/php.ini:z
         depends_on:
             - mariadb
